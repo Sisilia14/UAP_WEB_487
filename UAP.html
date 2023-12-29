@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UAP Pemrograman Web</title>
+  </head>
+  <body>
+    <Table border="1">
+      <thead>
+        <th>Kode</th>
+        <th>Nama Barang</th>
+        <th>Harga</th>
+      </thead>
+      <tbody id="daftarBarang"></tbody>
+    </Table>
+    <h1>Inputan User</h1>
+    <thead>
+      <tr>
+    <table border="1">
+        <td>Masukan Kode</td>
+        <td>:</td>
+        <td><input type="text" id="kodbar" /></td>
+      </tr>
+      <tr>
+        <td>Banyak Barang</td>
+        <td>:</td>
+        <td><input type="text" id="banbar" /></td>
+      </tr>
+      <tr>
+        <td>
+          <button onclick="Tambah()">Submit</button>
+        </td>
+      </tr>
+    </table>
+    </thead>
+
+    <script>
+      const barang = {
+  "001": { nama: "A", harga: 10000 },
+  "002": { nama: "B", harga: 20000 },
+  "003": { nama: "C", harga: 30000 },
+};
+function tampilkanDaftarBarang() {
+  const daftarBarangElement = document.getElementById("daftarBarang");
+
+  for (const kode in barang) {
+    const { nama, harga } = barang[kode];
+    const row = document.createElement("tr");
+    const kodeCol = document.createElement("td");
+    kodeCol.textContent = kode;
+    row.appendChild(kodeCol);
+    const namaCol = document.createElement("td");
+    namaCol.textContent = nama;
+    row.appendChild(namaCol);
+
+    const hargaCol = document.createElement("td");
+    hargaCol.textContent = harga;
+    row.appendChild(hargaCol);
+
+    daftarBarangElement.appendChild(row);
+  }
+}
+function tambah() {
+  var kodeBarang = document.getElementById("kodbar").value;
+  var banyakBarang = document.getElementById("banbar").value;
+
+  if (barang.hasOwnProperty(kodeBarang)) {
+    var hargaBarang = barang[kodeBarang].harga;
+
+    var total = banyakBarang * hargaBarang;
+
+    alert("total pembayarannya adalah :" + total);
+
+    var uangbayar = prompt("Masukan uang user: ");
+    var kembalian = uangbayar - total;
+
+    alert("kembalian" + kembalian);
+  } else {
+    alert("Kode Barang invalid");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  tampilkanDaftarBarang();
+});
+    </script>
+  </body>
+</html>
